@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang='no'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title></title>
+    <link rel='stylesheet' href='CSSalltid.css'>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id = "media"></div>
+    <div id = "question"></div>
+    <div id = "answer"></div>
+    <button id = "button">Svar og gå til neste spørsmål</button>
+</body>
+
+<script>
+    let mediaEl = document.querySelector("#media");
+    let questionEl = document.querySelector("#question");
+    let answerEl = document.querySelector("#answer");
+    let buttonEl = document.querySelector("#button");
+
+    buttonEl.addEventListener("click", clickfunk);
+
+    let media = [];
+    let questions = ["Hvor kommer vi fra?","Hvor skal vi?","Hvorfor er vi her?","Hva er meningen med livet?"];
+    let answers = [
+        ["Jorda","Mødrene våre","Fra streetsa"],
+        ["Hjem","Til den evige hvile","Ingen steder","Til mars"],
+        ["For å dø","For å reprodusere oss selv","For å leve det best mulige livet"],
+        ["Å dø", "Å unngå å dø lengst mulig", "Å ikke dø", "Å dø når vi føler for det"],
+    ];
+    let inputs = ["radio", "checkbox", "radio", "radio"];
+    let fasit = [
+        [-1,-1,1],
+        [-1,1,-1,-1],
+        [-1,1,-1],
+        [1,-1,-1,-1]
+    ]
+
+    let i = 0;
+    let poeng = 0;
+    showQuestion(i);
+
+    function showQuestion(nr) {
+        mediaEl.innerHTML = media[nr];
+        if (media[nr] === undefined) {
+            mediaEl.innerHTML = "";
+        }
+        questionEl.innerHTML = questions[nr];
+        answerEl.innerHTML = "";
+        for (let j = 0; j < answers[nr].length; j++) {
+            answerEl.innerHTML += "<input type=" + inputs[nr] + " value=" + fasit[nr][j] + " class='alternatives'>" + answers[nr][j] +"<br>";
+        }
+    }
+
+    function clickfunk (event) {
+        let alternatives = document.querySelectorAll(".alternatives");
+
+        for (let k = 0; k < alternatives.length; k++) {
+            if (fasit[i][k]>0) {
+                if (alternatives[k].checked) {
+                    poeng += 1;
+                }
+            }
+        }
+        i++
+        showQuestion(i);
+    }
+
+
+</script>
+
+</html>
