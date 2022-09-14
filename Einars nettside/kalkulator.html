@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang='no'>
+<head>
+
+    <link rel="stylesheet" href="CSShoved.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+    
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <ul>
+        <li><a href="index.html">Hjem</a></li>
+        <li><a href="seiling.html">Seiling</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="laserturken.html">Laserturken</a></li>
+        <li><a class="active" href="kalkulator.html">Kalkulator</a></li>
+    </ul> 
+
+
+    <div class="header">
+        <h3>KALKULATOR</h3>
+    </div>
+
+    <h3>Informasjon:</h3>
+    <p>Tar hensyn til regnerekkefølge, og klarer operatorene +,-,*,/. Klarer ikke parenteser eller flere operatorer etter hverandre uten tall imellom.</p>
+
+    <br>
+    <br>
+
+    <div class="kalkulator-container">
+
+        <div class="kitem-1 "> <input id="idInn" type="text"> </div>
+        <div class="kitem0"> <p class="tekst kitem0">0</p> </div>
+        <div class="kitem1"> <p class="tekst kitem1">1</p> </div>
+        <div class="kitem2"> <p class="tekst kitem2">2</p> </div>
+        <div class="kitem3"> <p class="tekst kitem3">3</p> </div>
+        <div class="kitem4"> <p class="tekst kitem4">4</p> </div>
+        <div class="kitem5"> <p class="tekst kitem5">5</p> </div>
+        <div class="kitem6"> <p class="tekst kitem6">6</p> </div>
+        <div class="kitem7"> <p class="tekst kitem7">7</p> </div>
+        <div class="kitem8"> <p class="tekst kitem8">8</p> </div>
+        <div class="kitem9"> <p class="tekst kitem9">9</p> </div>
+        <div class="kitem10"> <p class="tekst kitem10">&#960;</p> </div>
+        <div class="kitem11"> <p class="tekst kitem11">,</p> </div>
+        <div class="kitem12"> <p class="tekst kitem12">+</p> </div>
+        <div class="kitem13"> <p class="tekst kitem13">-</p> </div>
+        <div class="kitem14"> <p class="tekst kitem14">*</p> </div>
+        <div class="kitem15"> <p class="tekst kitem15">/</p> </div>
+        <div class="kitem16"> <p class="tekst kitem16">=</p> </div>
+        <div class="kitem17"> <p class="tekst kitem17">AC</p> </div>
+
+    </div>
+
+</body>
+
+<script>
+
+    let innEl = document.getElementById("idInn");
+    innEl.addEventListener("keydown",utregning1);
+    innEl.focus();
+
+    let tilbakeEl = document.getElementById("idTilbake");
+
+    let knapper = document.getElementsByClassName("tekst");
+ 
+    for (i = 0; i <= knapper.length - 1; i++) {
+        knapper[i].addEventListener("click", klikkfunk);
+    }
+
+    function klikkfunk (event) {   //Funksjonene til alle knappene
+
+        if (event.target.classList.contains("kitem0")) { innEl.value += "0";}
+        if (event.target.classList.contains("kitem1")) { innEl.value += "1";}
+        if (event.target.classList.contains("kitem2")) { innEl.value += "2";}
+        if (event.target.classList.contains("kitem3")) { innEl.value += "3";}
+        if (event.target.classList.contains("kitem4")) { innEl.value += "4";}
+        if (event.target.classList.contains("kitem5")) { innEl.value += "5";}
+        if (event.target.classList.contains("kitem6")) { innEl.value += "6";}
+        if (event.target.classList.contains("kitem7")) { innEl.value += "7";}
+        if (event.target.classList.contains("kitem8")) { innEl.value += "8";}
+        if (event.target.classList.contains("kitem9")) { innEl.value += "9";}
+
+        if (event.target.classList.contains("kitem10")) { innEl.value += "π";}
+        if (event.target.classList.contains("kitem11")) { innEl.value += ",";}
+        if (event.target.classList.contains("kitem12")) { innEl.value += "+";}
+        if (event.target.classList.contains("kitem13")) { innEl.value += "-";}
+        if (event.target.classList.contains("kitem14")) { innEl.value += "*";}
+        if (event.target.classList.contains("kitem15")) { innEl.value += "/";}
+        if (event.target.classList.contains("kitem16")) { utregning();}
+        if (event.target.classList.contains("kitem17")) { innEl.value = "";}
+
+    }
+
+    arraySifre = ["0","1","2","3","4","5","6","7","8","9","π",",","."] //Liste med alt som ikke er operatorer
+    
+    function utregning1 (event){    //Dersom man trykker enter
+        if (event.keyCode === 13){
+            utregning();
+        }
+    }
+
+    function utregning(){
+        innEl.value=innEl.value.replace(/,/g,'.') //Funker ikke helt
+        innEl.value=innEl.value.replace(/π/g,Math.PI);
+        let arraySymboler = Array.from(innEl.value);  //Lager en array av regnestykket
+
+        let arrayTall = [];
+        let arrayOperatorer = [];
+        let arrayMidlertidig = [];
+
+        for (let i = 0; i < arraySymboler.length; i++) { //Sorterer i en array for tall og en for operatorer
+            if (arraySifre.includes(arraySymboler[i]) === true) {
+                arrayMidlertidig.push(arraySymboler[i]); //Sifrene i hvert tall lagres i en egen array mellom hver operator
+            }
+            else {
+                arrayOperatorer.push(arraySymboler[i]);
+                arrayTall.push(Number(arrayMidlertidig.join(""))); //Møter vi på en operator lagres den midlertidige arrayen som ett element i tallarrayen
+                arrayMidlertidig = [];
+            }
+        }
+        arrayTall.push(Number(arrayMidlertidig.join(""))); //For det siste tallet, som ikke har operator etter seg
+
+        console.log(arrayOperatorer);
+        console.log(arrayTall);
+
+        i = 0;
+        while (i < arrayOperatorer.length) { //Regner ut gange og dele
+            if (arrayOperatorer[i] === "*") {
+                arrayTall[i] = arrayTall[i] * arrayTall[i+1];
+                arrayTall.splice(i+1,1);
+                arrayOperatorer.splice(i,1);
+            }
+            else if (arrayOperatorer[i] === "/") {
+                arrayTall[i] = arrayTall[i] / arrayTall[i+1];
+                arrayTall.splice(i+1,1);
+                arrayOperatorer.splice(i,1);
+            }
+            else {
+                i += 1;
+            }
+        }
+
+        console.log(arrayOperatorer);
+        console.log(arrayTall);
+        
+        i = 0;
+        while (i < arrayOperatorer.length) {  //Regner ut pluss og minus
+            if (arrayOperatorer[i] === "+") {
+                arrayTall[i] = arrayTall[i] + arrayTall[i+1];
+                arrayTall.splice(i+1,1);
+                arrayOperatorer.splice(i,1);
+            }
+            else if (arrayOperatorer[i] === "-") {
+                arrayTall[i] = arrayTall[i] - arrayTall[i+1];
+                arrayTall.splice(i+1,1);
+                arrayOperatorer.splice(i,1);
+            }
+            else {
+                i += 1;
+            }
+        }
+
+        innEl.value = arrayTall
+
+        console.log(arrayOperatorer);
+        console.log(arrayTall);
+    }
+
+
+    //Kan hende jeg kunne brukt indexOf() for å finne operatorene. IndexOf() finner tegnet i stingen du setter inn i parentesen.
+    //Ser nå at det kanskje hadde vært bedre å ha array med alle operatorene
+    // Lage generelle funksjoner med return
+    // Få med eksponent og en error ved divisjon med 0q
+    //Få med eksponensialkonvertering og 
+
+    /*For fakultet*/
+
+/*
+    let fakultet = fakultetfunk(4);
+
+    function fakultetfunk(verdi) {
+        if (verdi === 0) {
+            return 1;
+        }
+        else if (verdi > 0) {
+            let produkt = verdi;
+            for (let i = verdi-1; i>0; i--) {
+                produkt *= i;
+            }
+            return produkt;
+        }
+    }
+    console.log(fakultet);
+*/
+
+</script>
+
+</html>

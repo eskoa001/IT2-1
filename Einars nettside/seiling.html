@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="CSShoved.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seiling</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <ul>
+        <li><a href="index.html">Hjem</a></li>
+        <li><a class="active" href="seiling.html">Seiling</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="laserturken.html">Laserturken</a></li>
+        <li><a href="kalkulator.html">Kalkulator</a></li>
+    </ul> 
+
+    <div class="header">
+        <h3>SEILING</h3>
+    </div> 
+
+    <h1 class="overskrift overskriftseiling" id="idTittel"></h1>
+
+    <div class="seiling-container">
+
+        <div class="seiling-item item1">
+            <img src="laserseiling.jpg" alt="laserseiling">
+        </div>
+
+        <div class="seiling-item item2">
+            <img src="onsdagsregatta.jpg" alt="onsdagsregatta">
+        </div>
+
+        <div class="seiling-item item3">
+            <img src="17.mai.jpeg" alt="17.mai">
+        </div>
+
+        <div class="seiling-item item4">
+            <img src="katamaran.jpg" alt="katamaran">
+        </div>
+
+        <div class="seiling-item item5">
+            <img src="mesternesmester3.jpg" alt="foil">
+        </div>
+
+        <div class="seiling-item item6">
+            <img src="katamaran2.jpg" alt="katamaran">
+        </div>
+
+        <div class="seiling-item item7">
+            <img src="17.mai2.jpg" alt="katamaran">
+        </div>
+
+        <div class="seiling-item item8">
+            <img src="meg.jpg" alt="katamaran">
+        </div>
+
+        <div class="seiling-item item9">
+            <img src="mesternesmester2.jpg" alt="katamaran">
+        </div>
+        
+        <div class="seiling-item item10">
+            <img src="mesternesmester.jpg" alt="katamaran">
+        </div>
+
+        <div class="seiling-item item11">
+            <img src="foil.jpg" alt="katamaran">
+        </div>
+
+        <div class="seiling-item item12">
+            <img src="onsdagsregatta2.jpg" alt="katamaran">
+        </div>
+
+        <div class="seiling-item item13">
+            <img src="laser.JPG" alt="katamaran">
+        </div>
+
+        <div class="seiling-item item14">
+            <img src="optimist.JPG" alt="katamaran">
+        </div>
+
+    </div>
+
+
+
+<script>
+
+    //For tittel med navn
+    var TittelEl = document.getElementById("idTittel");
+    if (localStorage.Navnlagring2 === undefined){
+        TittelEl.innerHTML = "Her er noen bilder som viser hva jeg driver med på fritiden";
+    }
+    else{
+        TittelEl.innerHTML = "Hei, " + localStorage.Navnlagring2 + ". Her er noen bilder som viser hva jeg driver med på fritiden";
+    }
+
+</script>
+
+</body>
+</html>

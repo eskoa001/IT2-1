@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="CSShoved.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laserturken</title>
+    <style>
+        
+        img {
+            width: 45%; 
+            height: auto; 
+            display: block; 
+            margin-left: auto; 
+            margin-right: auto;
+        }
+
+        p {
+            text-align: center;
+        }
+        
+       
+    </style>
+
+</head>
+
+<body>
+
+    <ul>
+        <li><a href="index.html">Hjem</a></li>
+        <li><a href="seiling.html">Seiling</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a class="active" href="laserturken.html">Laserturken</a></li>
+        <li><a href="kalkulator.html">Kalkulator</a></li>
+    </ul>
+    
+    <div class="header">
+        <h3>LASERTURKEN</h3>
+    </div> 
+
+    <h1 class="overskrift" id="idTittel"></h1>
+
+    <div class="ytreflex">
+        <div class="indreflex" id=laserturkentekst>
+            <p>LASER TURKEN! &#8594;</p>
+        </div>
+        <div class="indreflex" id=laserturkenbilde>
+            <img id="laserturken" src="Laserturken.jpg" alt="Laserturken">
+            <img class="noDisplay" id="laserturkenlaser" src="Laserturkenlaser.jpg" alt="Laserturkenlaser">
+        </div>
+        <div class="indreflex"></div>
+    </div>
+
+    <p>Truer med å drepe den nye Lasermannen, hele hans familie og alle med samme etternavn.</p>
+
+    <div align="center">
+    <audio controls>
+        <source src="laserturken lydspor.mp3" type="audio/mp3">
+    </audio>
+    </div>
+    
+    <script>
+        var x=0;
+        var laserturk=document.getElementById("laserturken");
+        laserturk.addEventListener("click",byttbilde);
+        var laserturklaser=document.getElementById("laserturkenlaser");
+        laserturklaser.addEventListener("click",byttbilde);
+
+        function byttbilde (event) { //Displayer nytt bilde og displayer none på det andre
+        
+            if(x===0){
+                laserturklaser.classList.remove("noDisplay");
+                laserturk.classList.add("noDisplay");
+                x=1
+            }
+            else {
+                laserturk.classList.remove("noDisplay");
+                laserturklaser.classList.add("noDisplay");
+                x=0;
+            }    
+        }
+
+        var TittelEl = document.getElementById("idTittel"); //For tittel med navn
+        if (localStorage.Navnlagring2 === undefined){
+            TittelEl.innerHTML = "Dette er LASERTURKEN!";
+        }
+        else{
+            TittelEl.innerHTML = "Hei, " + localStorage.Navnlagring2 + ". Dette er LASERTURKEN!";
+        }
+    </script> 
+</body>
+</html>

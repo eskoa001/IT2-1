@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="CSShoved.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    
+    <ul>
+        <li><a href="index.html">Hjem</a></li>
+        <li><a href="seiling.html">Seiling</a></li>
+        <li><a class="active" href="quiz.html">Quiz</a></li>
+        <li><a href="laserturken.html">Laserturken</a></li>
+        <li><a href="kalkulator.html">Kalkulator</a></li>
+    </ul> 
+
+    <div class="header">
+        <h3>QUIZ</h3>
+    </div> 
+
+    <h1 class="overskrift" id="idTittel">&nbsp;</h1>
+
+    <div class="question">
+    <p>Hvorfor er seriell kommunikasjon raskere enn paralell kommunikasjon?</p>
+    <button class="button riktig">Fordi det begrenser hastigheten at bitsene ankommer samtidig</button>
+    <button class="button feil">Fordi ingen har satset ordentlig på seriell kommunikasjon</button>
+    <button class="button feil">Fordi de fleste enheter ikke kan motta mer en en bit av gangen uansett</button>
+    <p class=svar></p>
+    </div>
+
+    <div class="question noDisplay">
+    <p>Hva er en protokoll?</p>
+    <button class="button riktig">En standard for datakommunikasjon</button>
+    <button class="button feil">Evakueringsprosedyre ved atomangrep</button>
+    <button class="button feil">En form for programmeringsmanual</button>
+    <p class=svar></p>      
+    </div>
+
+    <div class="question noDisplay">
+    <p>Hva står ROM for?</p>
+    <button class="button feil">Rapid Oscillation Memory</button>
+    <button class="button feil">Recessive Overdrive Memory</button>
+    <button class="button riktig">Read Only Memory</button>
+    <p class=svar></p>
+    </div>
+
+    <div class="question noDisplay">
+    <p>Hva er forskjellen på HTTP og HTTPS?</p>
+    <button class="button riktig">HTTPS inneholder kryptering</button>
+    <button class="button feil">S</button>
+    <button class="button feil">HTTPS er en eldre type protokoll</button>
+    <p class=svar></p>
+    </div>
+
+    <div id="IdEndScreen" class="noDisplay"> 
+        <p>Godt jobbet, du fikk <span id=idInnerEndScreen></span> av 4 poeng</p>
+    </div> 
+
+    <button id="idRefresh">Ta quizen på nytt</button>
+    
+<script>
+
+    //For quizen
+    var i;
+    var spmnummer = 0;
+    var poeng = 0;
+    var InnerEndScreenEl = document.getElementById("idInnerEndScreen")
+
+    var knappEl = document.getElementsByClassName("button")
+    var spm = document.getElementsByClassName("question")
+    var svar = document.getElementsByClassName("svar")
+
+    for(i=0; i <= knappEl.length-1; i++) {
+        knappEl[i].addEventListener("click", klikkfunk)
+    }
+
+    function klikkfunk(event) {  //RIktig/feil og poeng
+        if(event.target.classList.contains("riktig")){
+            event.target.style.backgroundColor = "green"
+            svar[spmnummer].innerHTML = "Riktig! Bra jobba!"
+            poeng = poeng + 1
+        }
+        else {
+            event.target.style.backgroundColor = "red"
+            svar[spmnummer].innerHTML = "HAHAHA! Du tok feil!"
+        }
+        spm[spmnummer].replaceWith(spm[spmnummer].cloneNode(true));
+        setTimeout(Bytt, 1000)
+    }
+
+    function Bytt() { //Bytter til neste spørsmål i arrayen
+        if(spmnummer === spm.length - 1){
+            var EndScreenEl = document.getElementById("IdEndScreen")
+            spm[spmnummer].classList.add("noDisplay")
+            EndScreenEl.classList.remove("noDisplay")
+            InnerEndScreenEl.innerHTML += poeng
+        }
+        else {
+            spm[spmnummer].classList.add("noDisplay")
+            spm[spmnummer+1].classList.remove("noDisplay")
+            spmnummer = spmnummer + 1
+        }
+    }
+
+    var RefreshEl = document.getElementById("idRefresh") //Knapp for å ta quizen på nytt
+    RefreshEl.addEventListener("click",nyfunk)
+    function nyfunk(event) {
+        location.reload(); 
+        }
+
+    
+    //For tittel med navn
+    var TittelEl = document.getElementById("idTittel");
+    if (localStorage.Navnlagring2 === undefined){
+        TittelEl.innerHTML = "Hei, ta min quiz!";
+    }
+    else {
+        TittelEl.innerHTML = "Hei, " + localStorage.Navnlagring2 + ". Ta min quiz!";
+    }
+
+</script>
+
+</body>
+</html>
