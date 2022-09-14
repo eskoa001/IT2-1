@@ -4,6 +4,9 @@
 
    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
+   Groundrules: As elaborated on further down in thos document, by viewing this pieace of zeroes and ones u have now accepted and sealed your fate. For all eternity untill the sun dies and the universe either expands or implodes your soul is mine. There is no exception, no but-ifs, the rules are crystal clear.
+   
+   
    1. Definitions.
 
       "License" shall mean the terms and conditions for use, reproduction,
