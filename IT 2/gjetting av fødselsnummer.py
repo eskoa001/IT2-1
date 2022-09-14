@@ -64,3 +64,6 @@ def finnnummere (inn):
                 print(n)
 finnnummere(fødselsnummer)
 #http://www.fnrinfo.no/Info/Oppbygging.aspx
+
+#morradi
+#heihei
